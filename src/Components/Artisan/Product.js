@@ -3,31 +3,10 @@ import ProductDetails from './ProductDetails';
 
 const Product = () => {
   // Assume you have products and artisans state
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'makrouth',
-      description: 'Description of Product 1',
-      comments: [], // Array to store comments for this product
-    },
-    {
-      id: 2,
-      name: 'zarbya',
-      description: 'Description of Product 2',
-      comments: [],
-    },
-    // Add more products as needed
-  ]);
+  const [products, setProducts] = useState([]);
 
   const [artisans, setArtisans] = useState([
-    {
-      id: 1,
-      name: 'syrine eladeb',
-    },
-    {
-      id: 2,
-      name: 'ryma smith',
-    },
+
   
   ]);
 

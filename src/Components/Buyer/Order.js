@@ -1,25 +1,27 @@
+
 import React from 'react';
-const Order = ({ orderDetails }) => {
-  const { orderedProducts, totalPrice, deliveryAddress, paymentMethod, orderDate } = orderDetails;
+
+const Order = ({ location }) => {
+  const { state: { orderDetails } } = location;
+
+  if (!orderDetails) {
+    return <p>No order details available.</p>;
+  }
+
+  const { totalAmount, quantityOrdered, phoneNumber, address, creditCardNumber, productName } = orderDetails;
 
   return (
     <div>
-      <h2>Your Order</h2>
-      <p>Order Date: {orderDate}</p>
+      <h2>Order Details</h2>
+      <p>Total Amount: dt{totalAmount}</p>
+      <p>Quantity Ordered: {quantityOrdered}</p>
+      <p>Buyer Information:</p>
       <ul>
-        {orderedProducts.map((product) => (
-          <li key={product.id}>
-            <h3>{product.name}</h3>
-            <p>Quantity: {product.quantity}</p>
-            <p>Price: dt{product.price}</p>
-          </li>
-        ))}
+        <li>Phone Number: {phoneNumber}</li>
+        <li>Address: {address}</li>
+        <li>Credit Card Number: {creditCardNumber}</li>
       </ul>
-
-      <h3>Total Price: ${totalPrice}</h3>
-      <h3>Delivery Address: {deliveryAddress}</h3>
-      <h3>Payment Method: {paymentMethod}</h3>
-
+      <p>Product Name: {productName}</p>
     </div>
   );
 };

@@ -128,11 +128,7 @@ const ArtisanRegistration = () => {
         <label style={labelStyle}>
           Password:
           <input type="password" name="password" value={formData.password} onChange={handleInputChange} style={inputStyle} />
-        </label>
-        <label style={labelStyle}>
-          Confirm Password:
-          <input type="password" name="confirm_password" value={formData.confirm_password} onChange={handleInputChange} style={inputStyle} />
-        </label>
+          </label>
         <label style={labelStyle}>
         Region:
         <input
@@ -147,10 +143,7 @@ const ArtisanRegistration = () => {
           Bio:
           <textarea name="bio" value={formData.bio} onChange={handleInputChange} style={textareaStyle} />
         </label>
-        <label style={labelStyle}>
-          Profile Image:
-          <input type="file" name="profileImage" onChange={(e) => handleImageChange(e, 'profileImage')} accept="image/*" style={fileInputStyle} />
-        </label>
+        
 
         {/* Conditionally render product fields */}
         {showProductFields && (

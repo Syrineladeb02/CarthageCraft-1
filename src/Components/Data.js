@@ -1,8 +1,9 @@
+// artisanData.js
 import pottery from "./images/pottery.jpg";
 import jewelry from "./images/jewelry.jpg";
 
 const artisanData = {
-  name: "syrine eladeb",
+  name: "Syrine Eladeb",
   bio: "A passionate artisan with a love for creating unique handcrafted products.",
   phoneNumber: "26893856",
   email: "syrine@gmail.com",
@@ -13,15 +14,23 @@ const artisanData = {
       name: "Handmade Pottery",
       description: "Beautiful ceramic pottery handcrafted with care.",
       price: 25.00,
-      image: pottery,  // Use the imported image variable
+      image: pottery,
+      comments: [
+        { _id: 1, user: { username: 'User1' }, text: 'Great product!' },
+        { _id: 2, user: { username: 'User2' }, text: 'I love it!' },
+      ],
     },
     {
       id: 2,
       name: "Artisanal Jewelry",
       description: "One-of-a-kind jewelry pieces that stand out.",
       price: 70.00,
-      image: jewelry,  // Use the imported image variable
-    }
+      image: jewelry,
+      comments: [
+        { _id: 3, user: { username: 'laila' }, text: 'Amazing craftsmanship!' },
+        { _id: 4, user: { username: 'ahmed' }, text: 'Unique designs!' },
+      ],
+    },
     // Add more products as needed
   ]
 };
@@ -30,20 +39,23 @@ export default artisanData;
 
 // buyerData.js
 const buyerData = {
-  name: 'Ryma smith',
+  name: 'Ryma Smith',
   email: 'rymaSmith@gmail.com',
-  address: '123 Rue nour, sokra, ariana',
+  address: '123 Rue Nour, Sokra, Ariana',
   // Add other relevant fields
 };
 
 export { buyerData };
+
+// mockOrderDetails.js
 const mockOrderDetails = {
   orderedProducts: [
-    { id: 1, name: 'Product 1', quantity: 2, price: 20 },
+    { id: 1, name: 'Handmade Pottery', quantity: 2, price: 25.00 },
+    { id: 2, name: 'Artisanal Jewelry', quantity: 1, price: 70.00 },
     // Add more products as needed
   ],
-  totalPrice: 40,
-  deliveryAddress: '123 Main St, Cityville',
+  totalPrice: 120.00,
+  deliveryAddress: '123 Rue Nour, Sokra, Ariana',
   paymentInfo: '**** **** **** 1234',
   orderDate: '2023-11-30',
 };

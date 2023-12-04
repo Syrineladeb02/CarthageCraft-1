@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ProductListing from './ProductListing';
+import ProductListing from './CardItem';
 
 const ArtisanProfile = ({ artisan }) => {
   const { id } = useParams();

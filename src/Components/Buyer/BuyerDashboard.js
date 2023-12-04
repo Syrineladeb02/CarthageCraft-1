@@ -1,51 +1,78 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProductSearch from './ProductSearch';
 import ProductListing from './ProductListing';
-import History from './History'; // Import the History component
+import History from './History';
+import BuyerProfile from './BuyerProfile';
+import ArtisanProfile from './ArtisanProfile';
+import { buyerData, orderHistoryData } from './data';
 
-const BuyerDashboard = ({ buyer }) => {
+// BuyerDashboard component
+const BuyerDashboard = () => {
+  // State variables
   const [products, setProducts] = useState([]);
-  const [History, setHistory] = useState([]); // State to store order history
+  const [artisans, setArtisans] = useState([]);
+  const [history, setHistory] = useState([]);
+  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
-  const mockProducts = [
-    { id: 1, name: 'Product 1', category: 'Category A', price: 20, region: 'Region X' },
-    { id: 2, name: 'Product 2', category: 'Category B', price: 30, region: 'Region Y' },
-    // Add more sample products
-  ];
-
+  // useEffect to fetch initial data
   useEffect(() => {
-    // Fetch initial products (replace with actual data fetching)
-    setProducts(mockProducts);
-
-    // Fetch order history (replace with actual data fetching)
-    const mockHistory = [
-      { orderId: '12345', totalPrice: 50 },
-      { orderId: '67890', totalPrice: 75 },
-      // Add more sample order history entries
-    ];
-    setHistory(mockHistory);
+    // Fetch initial products, artisans, and order history
+    setProducts(artisanData.products);
+    setArtisans([artisanData]);
+    setHistory(orderHistoryData);
   }, []);
 
-  const handleSearch = (searchCriteria) => {
-    const filteredProducts = mockProducts.filter((product) => {
-      const nameMatch = product.name.toLowerCase().includes(searchCriteria.searchTerm.toLowerCase());
-      const categoryMatch = product.category.toLowerCase().includes(searchCriteria.category.toLowerCase());
-      const priceMatch = searchCriteria.maxPrice === '' || product.price <= parseFloat(searchCriteria.maxPrice);
-      const regionMatch = product.region.toLowerCase().includes(searchCriteria.region.toLowerCase());
-
-      return nameMatch && categoryMatch && priceMatch && regionMatch;
-    });
-
-    setProducts(filteredProducts);
+  // Function to handle viewing all products
+  const handleViewAllProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:6006/api/products/all');
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching all products:', error);
+    }
   };
+
+  // Function to handle viewing all artisans
+  const handleViewAllArtisans = async () => {
+    try {
+      const response = await axios.get('http://localhost:6006/api/artisans/all');
+      setArtisans(response.data);
+    } catch (error) {
+      console.error('Error fetching all artisans:', error);
+    }
+  };
+
+  // Function to handle showing details of a product
+  const handleShowDetails = (productId) => {
+    setSelectedProductId(productId);
+  };
+
+
 
   return (
     <div>
-      <h2>{buyer.name}! Welcome to Your Dashboard as a Buyer!</h2>
-      <ProductSearch onSearch={handleSearch} />
-      <ProductListing products={products} />
-      {/* Add more sections as needed */}
-      <History History={History} />
+      <h2>{buyerData.name}! Welcome to Your Dashboard as a Buyer!</h2>
+      <ProductSearch />
+      <div>
+        <button onClick={() => handleViewAllProducts()}>View Products</button>
+        <button onClick={() => handleViewAllArtisans()}>View Artisans</button>
+        <button onClick={() => handleViewOrderHistory()}>View Order History</button>
+      </div>
+
+      <ProductListing
+        products={products}
+        artisans={artisans}
+        onShowDetails={handleShowDetails}
+      />
+      {selectedProductId && <ArtisanProfile artisan={artisanData} />}
+      <History orderHistory={history} />
+
+      {/* Render the BuyerProfile component if updating is true */}
+      {isUpdatingProfile && (
+        <BuyerProfile buyer={buyerData} onUpdate={() => {}} onDelete={() => {}} />
+      )}
     </div>
   );
 };

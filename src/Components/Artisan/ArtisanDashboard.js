@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ArtisanProfile from './ArtisanProfile'; // Import your ArtisanProfile component
-import ProductListing from './ProductListing'; // Import your ProductListing component
+import ProductListing from './CardItem'; // Import your ProductListing component
 
 const ArtisanDashboard = ({ artisan, products }) => {
   return (
