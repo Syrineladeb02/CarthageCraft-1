@@ -1,63 +1,85 @@
-// artisanData.js
-import pottery from "./images/pottery.jpg";
-import jewelry from "./images/jewelry.jpg";
+import pottery from "../images/pottery.jpg";
+import jewelry from "../images/jewelry.jpg";
 
-const artisanData = {
-  name: "Syrine Eladeb",
-  bio: "A passionate artisan with a love for creating unique handcrafted products.",
-  phoneNumber: "26893856",
-  email: "syrine@gmail.com",
-  image: "frontend/src/profile.jpg",
-  products: [
-    {
-      id: 1,
-      name: "Handmade Pottery",
-      description: "Beautiful ceramic pottery handcrafted with care.",
-      price: 25.00,
-      image: pottery,
-      comments: [
-        { _id: 1, user: { username: 'User1' }, text: 'Great product!' },
-        { _id: 2, user: { username: 'User2' }, text: 'I love it!' },
-      ],
-    },
-    {
-      id: 2,
-      name: "Artisanal Jewelry",
-      description: "One-of-a-kind jewelry pieces that stand out.",
-      price: 70.00,
-      image: jewelry,
-      comments: [
-        { _id: 3, user: { username: 'laila' }, text: 'Amazing craftsmanship!' },
-        { _id: 4, user: { username: 'ahmed' }, text: 'Unique designs!' },
-      ],
-    },
-    // Add more products as needed
-  ]
-};
+export const artisans = [
+  {
+    id: 0,
+    name: "Syrine Eladeb",
+    bio: "A passionate artisan with a love for creating unique handcrafted products.",
+    address: "laouina",
+    image: "frontend/src/profile.jpg",
+    phoneNumber: "26893856",
+    email: "syrine@gmail.com",
+  },
+  {
+    
+    id: 1,
+    name: "rym lara ",
+    bio: "A passionate artisan with a love for creating unique handcrafted products.",
+    address: "sokra",
+    image: "frontend/src/profile.jpg",
+    phoneNumber: "96893876",
+    email: "rym@gmail.com",},
+  {
+    id: 2,
+    name: "ahmad bacha",
+    bio: "A passionate artisan with a love for creating unique handcrafted products.",
+    address: "tunis",
+    image: "frontend/src/profile.jpg",
+    phoneNumber: "26845856",
+    email: "ahmad@gmail.com"
+  },
+  // Add more artisans as needed
+];
+export const products = [
+  {
+    id: 0,
+    name: "Handmade Pottery",
+    description: "Beautiful ceramic pottery handcrafted with care.",
+    price: 55,
+    qte: 0,
+    image: pottery,
+    region:"tunis",
+    category:"pottery",
+    artisanId: 0, 
+    comments: [
+      { _id: 1, user: { username: 'User1' }, text: 'Great product!' },
+      { _id: 2, user: { username: 'User2' }, text: 'I love it!' },
+    ],
+  },
+  {
+    id: 1,
+    name: "Artisanal Jewelry",
+    description: "One-of-a-kind jewelry pieces that stand out.",
+    price: 55,
+    qte: 0,
+    image:jewelry,
+    region:"tatouine",
+    category:"jewelry",
+    artisanId: 1, 
+    comments: [
+      { _id: 3, user: { username: 'laila' }, text: 'Amazing craftsmanship!' },
+      { _id: 4, user: { username: 'ahmed' }, text: 'Unique designs!' },
+    ],
+  },
+  {
+    id: 0,
+    name: "Artisanal accessories",
+    description: "One-of-a-kind jewelry pieces that stand out.",
+    price: 88,
+    qte: 0,
+    region:"tunis",
+    category:"jewelry",
+    image:jewelry,
+    artisanId: 2, 
+    comments: [
+      { _id: 3, user: { username: 'laila' }, text: 'Amazing craftsmanship!' },
+      { _id: 4, user: { username: 'ahmed' }, text: 'Unique designs!' },
+    ],
+  },
+  // Add more products as needed
+];
 
-export default artisanData;
 
-// buyerData.js
-const buyerData = {
-  name: 'Ryma Smith',
-  email: 'rymaSmith@gmail.com',
-  address: '123 Rue Nour, Sokra, Ariana',
-  // Add other relevant fields
-};
 
-export { buyerData };
 
-// mockOrderDetails.js
-const mockOrderDetails = {
-  orderedProducts: [
-    { id: 1, name: 'Handmade Pottery', quantity: 2, price: 25.00 },
-    { id: 2, name: 'Artisanal Jewelry', quantity: 1, price: 70.00 },
-    // Add more products as needed
-  ],
-  totalPrice: 120.00,
-  deliveryAddress: '123 Rue Nour, Sokra, Ariana',
-  paymentInfo: '**** **** **** 1234',
-  orderDate: '2023-11-30',
-};
-
-export { mockOrderDetails };

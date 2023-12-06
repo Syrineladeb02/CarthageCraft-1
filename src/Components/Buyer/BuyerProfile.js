@@ -10,7 +10,16 @@ const BuyerProfile = ({ buyer, onUpdate, onDelete }) => {
     address: buyer.address,
     creditCardNumber: buyer.creditCardNumber,
   });
-
+  const styles = {
+    button: {
+      background: '#34bd78',
+      color: 'white',
+      padding: '8px 20px',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+    },
+  };
   const handleInputChange = (e) => {
     setFormData({
       ...formData,

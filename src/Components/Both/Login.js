@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios"; 
 import { useNavigate } from "react-router-dom"; 
 
+
 const Login = () => {
   const [loginData, setLoginData] = useState({
     email: '',
@@ -31,7 +32,7 @@ const Login = () => {
         const token = response.data.token;
         localStorage.setItem("token", token);
         if (response.data.user.role === 'user') {
-          navigate('/productList');
+          navigate('/products');
         } else {
           navigate('/dashboard');
         }

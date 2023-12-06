@@ -1,80 +1,105 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Review from '../Buyer/Review';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import { useNavigate } from "react-router-dom";
 
-const CardItem = ({
-  products,
+
+export default function CardItem({
+  elt,
   artisans,
-  onIncreaseQuantity,
-  onDecreaseQuantity,
+  details,
+  handleIncrement,
+  handleDecrement,
   handleDelete,
+  handleSumIncrement,
+  handleSumDecrement,
   handleSumDelete,
-}) => {
-  const [quantities, setQuantities] = useState({});
+}) {
+  const increment = () => {
+    handleIncrement(elt.id);
+    handleSumIncrement(elt.price);
+  };
+  const decrement = () => {
+    handleDecrement(elt.id);
+    handleSumDecrement(elt);
+  };
+
+  const deleteProduct = () => {
+    handleDelete(elt.id);
+    handleSumDelete(elt);
+  };
+
+  const artisan = artisans.find(a => a.id === elt.artisanId);
   const navigate = useNavigate();
-
-  const handleIncreaseQuantity = (eltId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [eltId]: (prevQuantities[eltId] || 0) + 1,
-    }));
-    onIncreaseQuantity(eltId);
+  const showDetails = () => {
+    navigate(`/products/${elt.id}`);
   };
 
-  const handleDecreaseQuantity = (eltId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [eltId]: Math.max((prevQuantities[eltId] || 0) - 1, 0),
-    }));
-    onDecreaseQuantity(eltId);
-  };
-
-  const deleteProduct = (eltId) => {
-    handleDelete(eltId);
-    handleSumDelete(eltId);
-  };
-
-  const showDetails = (eltId) => {
-    navigate(`/products/${eltId}`);
-  };
-
+  const stars = [...Array(5)].map((item, i) => {
+    return (
+      <span
+        style={{ color: elt.rating >= i ? "gold" : "grey", fontSize: "20px" }}
+      >
+        ★
+      </span>
+    );
+  });
   return (
-    <div>
-      <h2>Products</h2>
-      <ul>
-        {products && products.length > 0 ? (
-          products.map((elt) => {
-            const artisan = artisans.find((a) => a.id === elt.artisanId);
+    <Card style={{ width: "18rem", marginTop: "60px" }}>
+      <Card.Img variant="top" src={elt.image} style={{ maxHeight: "200px" }} />
+      <Card.Body
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "15px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ display: "flex", gap: "20px" }}>
+          <Card.Title>{elt.name}</Card.Title>
+          {details && <Card.Title>{elt.category}</Card.Title>}
+          <Card.Text>{elt.price} $</Card.Text>
+          {artisan && <Card.Text>Artisan: {artisan.name}</Card.Text>}
+          {details && <Card.Text>Region: {elt.region}</Card.Text>}
+          {details && <Card.Text>Category: {elt.category}</Card.Text>}
+        </div>
+        <span> {stars}</span>
 
-            return (
-              <li key={elt.id}>
-                <h3>{elt.name}</h3>
-                <p>Price: dt{elt.price}</p>
-                <p>Artisan: {artisan.name}</p>
-                <img src={elt.image} alt={elt.name} style={{ maxWidth: '100px' }} />
+        {/* {details && <p style={{textAlign:"justify"}}> {elt.description} </p> }     */}
 
-                {/* Comment Section */}
-                <Review comments={elt.comments || []} />
+        
+        {!details && (
+          <>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <Button variant="success" onClick={increment}>
+                +
+              </Button>
+              <span>{elt.qte}</span>
+              <Button variant="primary" onClick={decrement}>
+                -
+              </Button>
+            </div>
 
-                <div>
-                  <button onClick={() => handleDecreaseQuantity(elt.id)}>-</button>
-                  <span>Quantity: {quantities[elt.id] || 0}</span>
-                  <button onClick={() => handleIncreaseQuantity(elt.id)}>+</button>
-                </div>
-
-                <div>
-                  <button onClick={() => deleteProduct(elt.id)}>Delete</button>
-                  <button onClick={() => showDetails(elt.id)}>Show Details</button>
-                </div>
-              </li>
-            );
-          })
-        ) : (
-          <p>No products available.</p>
+            <Button variant="danger" onClick={deleteProduct}>
+              Delete
+            </Button>
+          </>
         )}
-      </ul>
-    </div>
-  );
-};
 
-export default CardItem;
+        {!details && (
+          <Button
+            variant="light"
+            style={{ border: "1px solid black" }}
+            onClick={showDetails}
+          >
+            More Details <Badge bg="secondary">i</Badge>
+          </Button>
+        )}
+      </Card.Body>
+    </Card>
+  );
+}
+
+
