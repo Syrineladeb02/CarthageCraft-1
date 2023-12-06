@@ -90,6 +90,18 @@ return (
           />
         }
       />
+        <Route
+          path="/products/:id"
+          element={
+            <ProductDetails
+              products={product}  // Pass the products array to ProductDetails
+              handleIncrement={handleIncrement}
+              handleDecrement={handleDecrement}
+              handleSumIncrement={handleSumIncrement}
+              handleSumDecrement={handleSumDecrement}
+            />
+          }
+        />
        <Route path= "/products/:id" element ={<ProductDetails product={product}  />}  />
 
         {/* The /products route can be removed or adjusted as needed */}

@@ -28,9 +28,9 @@
 //   };
 
 //   return (
-//     <div>
+//     <div >
 //       {/* Render ProductDetails with onAddComment prop */}
-//       <ProductDetails products={products} artisans={artisans} onAddComment={handleAddComment} />
+//       <ProductDetails  products={products} artisans={artisans} onAddComment={handleAddComment} />
 //     </div>
 //   );
 // };

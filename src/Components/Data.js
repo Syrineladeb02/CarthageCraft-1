@@ -39,7 +39,7 @@ export const products = [
     price: 55,
     qte: 0,
     image: pottery,
-    region:"tunis",
+    region: "kairouan",
     category:"pottery",
     artisanId: 0, 
     comments: [

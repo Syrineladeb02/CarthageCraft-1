@@ -16,6 +16,7 @@ export default function ListOfProducts({
 }) {
   const handleSearch = (searchCriteria) => {
     // Implement your product filtering logic based on searchCriteria
+    
     const filteredProducts = product.filter((product) => {
       // Your filtering conditions go here
       return (
@@ -42,9 +43,9 @@ export default function ListOfProducts({
   const buttonStyle = {
     marginRight: '50px', // Adjust as needed
     padding: '8px 50px', // Adjust as needed
-    borderRadius: '5px', // Adjust as needed
+    borderRadius: '8px', // Adjust as needed
     cursor: 'pointer',
-    border: '3px solid #34bd78',
+    border: '3px solid gray',
    paddingRight:"50px",
   
 
