@@ -3,11 +3,11 @@ import Button from "react-bootstrap/esm/Button";
 import { useParams } from "react-router-dom";
 import { artisans } from "../Data";
 
-export default function ProductDetails({
+const ProductDetails = ({
   products,
   handleIncrement,
   handleDecrement, 
-}) {
+}) => {
   const { id } = useParams();
   const elt = products.find((elt) => elt.id === Number(id));
   const artisan = artisans.find((a) => a.id === elt.artisanId);
@@ -25,6 +25,8 @@ export default function ProductDetails({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: "10px",
+    backgroundColor: "#f5f5dc", // Set the background color to beige
+    padding: "20px", // Add padding for spacing
   };
 
   const imageStyle = {
@@ -45,7 +47,6 @@ export default function ProductDetails({
     display: "flex",
     gap: "10px",
     marginTop: "20px",
-   
   };
 
   const buttonStyle = {
@@ -65,8 +66,7 @@ export default function ProductDetails({
     backgroundColor: "#3498db",
     color: "#fff",
     border: "none",
-    backgroundColor:" #51b884",
-    
+    backgroundColor: "#51b884",
   };
 
   return (
@@ -82,9 +82,6 @@ export default function ProductDetails({
         <div>
           <p>
             <strong>Name:</strong> {elt.name}
-          </p>
-          <p>
-            <strong>Brand:</strong> {elt.brand}
           </p>
           <p>
             <strong>Price:</strong> {elt.price} dt
@@ -133,4 +130,6 @@ export default function ProductDetails({
       </div>
     </div>
   );
-}
+};
+
+export default ProductDetails;

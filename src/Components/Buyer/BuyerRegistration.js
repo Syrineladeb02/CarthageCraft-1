@@ -1,19 +1,20 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const BuyerRegistration = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    //confirmPassword: '',
-   // profileImage: null,
     phoneNumber: '',
     address: '',
-    creditCardNumber: ''
+    creditCardNumber: '',
   });
-  const [isSubmitted, setIsSubmitted] = useState(false); // New state for submission status
-  
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -21,32 +22,23 @@ const BuyerRegistration = () => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      profileImage: file,
-    }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8008/api/register", formData)
+      .then((response) => {
+        console.log(response.data);
+        setIsSubmitted(true);
+        
+        // Redirect to the buyer's profile after successful registration
+        navigate('/buyer-profile');
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+        setIsSubmitted(false);
+      });
   };
-
- /////////////////////////////////////new//////////////////////////////////////////////// 
- const url = "http://localhost:6006/api/register";
- 
- const handleSubmit = (e) => { 
-  e.preventDefault(); 
-
-  axios 
-    .post(url, formData) 
-    .then((response) => { 
-      console.log(response.data); 
-      setIsSubmitted(true); 
-      // Handle response... 
-    }) 
-    .catch((error) => { 
-      console.error("There was an error!", error);
-      setIsSubmitted(false); 
-    }); 
-};
 
 /////////////////////////////////////
 
@@ -110,7 +102,8 @@ const BuyerRegistration = () => {
       <button type="submit" style={buttonStyle}>
         Register as a Buyer
       </button>
-      {isSubmitted && <div>Buyer added successfully!</div>} {/* Success message */}
+      {isSubmitted && <div>Buyer added successfully!</div>} 
+      {/* Success message */}
     </form>
   );
 };

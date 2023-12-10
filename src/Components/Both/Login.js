@@ -32,14 +32,15 @@ const Login = () => {
         const token = response.data.token;
         localStorage.setItem("token", token);
         if (response.data.user.role === 'user') {
-          navigate('/products');
+          // Redirect to the buyer's profile after successful login
+          navigate('/buyer-profile');
         } else {
           navigate('/dashboard');
         }
       })
       .catch((error) => {
         console.error("There was an error!", error);
-        setError("Incorrect email or password"); // Set error message
+        setError("Incorrect email or password");
       });
   };
 

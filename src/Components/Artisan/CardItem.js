@@ -3,9 +3,10 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import { useNavigate } from "react-router-dom";
+import { products } from "../Data";
 export default function CardItem({
   elt,
-  artisans,
+  artisans = [],
   details,
   handleIncrement,
   handleDecrement,
@@ -29,10 +30,10 @@ export default function CardItem({
     handleSumDelete(elt);
   };
 
-  const artisan = artisans.find((a) => a.id === elt.artisanId);
+  const artisan = artisans.find(a => a.id === elt.artisanId);
   const navigate = useNavigate();
   const showDetails = () => {
-    navigate(`/products/${elt.id}`);
+    navigate(`/products/${elt.id}`, { state: { artisans: artisans } });
   };
 
   const stars = [...Array(5)].map((item, i) => (

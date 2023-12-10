@@ -1,80 +1,199 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ProductSearch from './ProductSearch';
-import ProductListing from './ProductListing';
-import History from './History';
-import BuyerProfile from './BuyerProfile';
-import ArtisanProfile from './ArtisanProfile';
-import { buyerData, orderHistoryData } from './data';
+import React, { useState } from 'react';
+import logo from "../../images/logo.jpg";
+import { Link } from 'react-router-dom';
 
-// BuyerDashboard component
-const BuyerDashboard = () => {
-  // State variables
-  const [products, setProducts] = useState([]);
-  const [artisans, setArtisans] = useState([]);
-  const [history, setHistory] = useState([]);
-  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null);
+const ArtisanRegistration = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    bio: '',
+    region: '', // Add region field
+    // Product details
+    productName: '',
+    productDescription: '',
+    productPrice: '',
+    productImage: null,
+  });
 
-  // useEffect to fetch initial data
-  useEffect(() => {
-    // Fetch initial products, artisans, and order history
-    setProducts(artisanData.products);
-    setArtisans([artisanData]);
-    setHistory(orderHistoryData);
-  }, []);
+  const [showProductFields, setShowProductFields] = useState(false);
 
-  // Function to handle viewing all products
-  const handleViewAllProducts = async () => {
-    try {
-      const response = await axios.get('http://localhost:6006/api/products/all');
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching all products:', error);
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  // Function to handle viewing all artisans
-  const handleViewAllArtisans = async () => {
-    try {
-      const response = await axios.get('http://localhost:6006/api/artisans/all');
-      setArtisans(response.data);
-    } catch (error) {
-      console.error('Error fetching all artisans:', error);
-    }
+  const handleImageChange = (e, field) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: file,
+    }));
   };
 
-  // Function to handle showing details of a product
-  const handleShowDetails = (productId) => {
-    setSelectedProductId(productId);
+  const handleAddProduct = () => {
+    setShowProductFields(true);
   };
 
+  const handleNotNow = () => {
+    setShowProductFields(false);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Implement logic to handle form submission (e.g., send data to the server)
+    console.log('Form submitted:', formData);
+    // You can handle the image separately, such as uploading it to a server.
+    // formData.profileImage and formData.productImage contain the selected image files.
+  };
+
+  const formStyle = {
+    maxWidth: '500px',
+    padding: '30px',
+    border: '2px solid #51b884',
+    borderRadius: '30px',
+    backgroundColor: '#f9f9f9',
+    fontFamily: 'sans-serif',
+    marginTop: '20px',
+  };
+  const linkStyle = {
+    color: '#2d9ccf',
+  };
+  const labelStyle = {
+    display: "block",
+    margin: '15px 0',
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '8px',
+    boxSizing: 'border-box',
+    border: '2px solid #9fbbad',
+    borderRadius: '10px',
+    marginBottom: '9px',
+  };
+
+  const logoStyle = {
+    marginLeft: "20%", // Adjust the margin-left as needed
+    marginBottom: "20px",
+    padding: "1px", // Adjust the height as needed
+  };
+
+  const textareaStyle = {
+    width: '100%',
+    padding: '8px',
+    boxSizing: 'border-box',
+    marginBottom: '10px',
+  };
+
+  const fileInputStyle = {
+    marginBottom: '10px',
+  };
+
+  const RegisterStyle = {
+    background: '#34bd78',
+    color: 'white',
+    padding: '10px',
+    border: '2px gray solid ',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginRight: '10px',
+  };
+
+  const AddStyle = {
+    background: '#42555f',
+    color: 'white',
+    padding: '10px',
+    border: '2px gray solid ',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginRight: '10px',
+  };
 
   return (
-    <div>
-      <h2>{buyerData.name}! Welcome to Your Dashboard as a Buyer!</h2>
-      <ProductSearch />
-      <div>
-        <button onClick={() => handleViewAllProducts()}>View Products</button>
-        <button onClick={() => handleViewAllArtisans()}>View Artisans</button>
-        <button onClick={() => handleViewOrderHistory()}>View Order History</button>
-      </div>
+    <body style={{ padding: "20px", margin: "1px", backgroundColor: "beige", paddingLeft: "50px", marginTop: "4px", paddingRight: "55px" }}>
+      <form style={formStyle} onSubmit={handleSubmit}>
+        <h2>Welcome to Artisan Panel</h2>
+        <label style={labelStyle}>
+          Name:
+          <input type="text" name="name" value={formData.name} onChange={handleInputChange} style={inputStyle} />
+        </label>
+        <label style={labelStyle}>
+          Email:
+          <input type="email" name="email" value={formData.email} onChange={handleInputChange} style={inputStyle} />
+        </label>
+        <label style={labelStyle}>
+          Password:
+          <input type="password" name="password" value={formData.password} onChange={handleInputChange} style={inputStyle} />
+          </label>
+        <label style={labelStyle}>
+        Region:
+        <input
+          type="text"
+          name="region"
+          value={formData.region}
+          onChange={handleInputChange}
+          style={inputStyle}
+        />
+      </label>
+        <label style={labelStyle}>
+          Bio:
+          <textarea name="bio" value={formData.bio} onChange={handleInputChange} style={textareaStyle} />
+        </label>
+        
 
-      <ProductListing
-        products={products}
-        artisans={artisans}
-        onShowDetails={handleShowDetails}
+        {/* Conditionally render product fields */}
+        {showProductFields && (
+          <>
+            <h3>Add Product</h3>
+            <label style={labelStyle}>
+              Name:
+              <input type="text" name="productName" value={formData.productName} onChange={handleInputChange} style={inputStyle} />
+            </label>
+            <label style={labelStyle}>
+              Description:
+              <textarea name="productDescription" value={formData.productDescription} onChange={handleInputChange} style={textareaStyle} />
+            </label>
+            <label style={labelStyle}>
+              Price:
+              <input type="text" name="productPrice" value={formData.productPrice} onChange={handleInputChange} style={inputStyle} />
+            </label>
+            <label style={labelStyle}>
+              Image:
+              <input type="file" name="productImage" onChange={(e) => handleImageChange(e, 'productImage')} accept="image/*" style={fileInputStyle} />
+            </label>
+            
+            <p style={{ padding: '20px' }}>
+          Already have an account?{' '}
+          <Link to="/login" style={linkStyle}>
+            Login here
+          </Link>
+        </p>
+            <img
+        src={logo}
+        alt="CarthageCraft Logo"
+        width="50%"
+        style={logoStyle}
       />
-      {selectedProductId && <ArtisanProfile artisan={artisanData} />}
-      <History orderHistory={history} />
+          </>
+        
+        )}
 
-      {/* Render the BuyerProfile component if updating is true */}
-      {isUpdatingProfile && (
-        <BuyerProfile buyer={buyerData} onUpdate={() => {}} onDelete={() => {}} />
-      )}
-    </div>
+        <button type="button" style={AddStyle} onClick={handleAddProduct}>
+          Add Product
+        </button>
+        <button type="button" style={AddStyle} onClick={handleNotNow}>
+          Not Now
+        </button>
+        <button type="submit" style={RegisterStyle}>
+          Register
+        </button>
+      </form>
+    </body>
   );
 };
 
-export default BuyerDashboard;
+export default ArtisanRegistration;

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom"; // Import Link
 
 import logo1 from "../../images/logo1.jpg";
 
@@ -47,9 +47,15 @@ function NavigationBar() {
                         <Nav.Link>
                             <NavLink to="/how-it-works" style={linkStyle}>HIW</NavLink>
                         </Nav.Link>
-                        {/* Add the following Nav.Link for the registration page */}
                         <Nav.Link>
                             <NavLink to="/register" style={linkStyle}>Register</NavLink>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <NavLink to="/products" style={linkStyle}>Products</NavLink>
+                        </Nav.Link>
+                        {/* Add a Nav.Link with Link for Artisan Profile */}
+                        <Nav.Link>
+                            <Link to="/artisan-profile" style={linkStyle}>Artisan Profile</Link>
                         </Nav.Link>
                     </Nav>
                 </Container>

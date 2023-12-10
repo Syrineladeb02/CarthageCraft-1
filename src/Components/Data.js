@@ -81,5 +81,22 @@ export const products = [
 ];
 
 
-
-
+export const buyers = [
+  {
+    id: 0,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phoneNumber: "1234567890",
+    address: "123 Main St",
+    cardNumber: "**** **** **** 1234",
+  },
+  {
+    id: 1,
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    phoneNumber: "9876543210",
+    address: "456 Oak St",
+    cardNumber: "**** **** **** 5678",
+  },
+  // Add more buyers as needed
+];
