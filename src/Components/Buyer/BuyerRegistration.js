@@ -26,7 +26,7 @@ const BuyerRegistration = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8008/api/register", formData)
+      .post("http://localhost:8008/api/buyer/register", formData)
       .then((response) => {
         console.log(response.data);
         setIsSubmitted(true);

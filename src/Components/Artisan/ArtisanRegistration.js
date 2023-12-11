@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import logo from "../../images/logo.jpg";
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const ArtisanRegistration = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -17,6 +18,8 @@ const ArtisanRegistration = () => {
   });
 
   const [showProductFields, setShowProductFields] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +36,25 @@ const ArtisanRegistration = () => {
       [field]: file,
     }));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Update the API endpoint based on the backend changes
+    axios
+    .post("http://localhost:8008/api/artisan/register", formData)
+    .then((response) => {
+      console.log(response.data);
+      setIsSubmitted(true);
+      
+      // Redirect to the buyer's profile after successful registration
+      navigate('/artisan-profile');
+    })
+    .catch((error) => {
+      console.error("There was an error!", error);
+      setIsSubmitted(false);
+    });
+};
+  
 
   const handleAddProduct = () => {
     setShowProductFields(true);
@@ -42,13 +64,7 @@ const ArtisanRegistration = () => {
     setShowProductFields(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Implement logic to handle form submission (e.g., send data to the server)
-    console.log('Form submitted:', formData);
-    // You can handle the image separately, such as uploading it to a server.
-    // formData.profileImage and formData.productImage contain the selected image files.
-  };
+  
 
   const formStyle = {
     maxWidth: '500px',
@@ -191,6 +207,8 @@ const ArtisanRegistration = () => {
         <button type="submit" style={RegisterStyle}>
           Register
         </button>
+        {isSubmitted && <div>Buyer added successfully!</div>} 
+       
       </form>
     </body>
   );
