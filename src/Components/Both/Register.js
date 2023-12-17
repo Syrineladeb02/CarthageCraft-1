@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BuyerRegistration from '../Buyer/BuyerRegistration';
 import ArtisanRegistration from '../Artisan/ArtisanRegistration';
-import logo from "../../images/logo.jpg";
 
 const Register = () => {
   const [userRole, setUserRole] = useState(null);
@@ -11,35 +10,67 @@ const Register = () => {
     setUserRole(role);
   };
 
-  
+  const containerStyle = {
+    margin: 'auto',
+    marginTop: '50px',
+    maxWidth: '600px',
+    backgroundColor: '#fff',
+    padding: '40px',
+    borderRadius: '10px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  };
 
   const buttonStyle = {
     display: 'block',
-    width: '30%',
-    padding: '20px',
+    width: '100%',
+    padding: '15px',
     marginBottom: '20px',
-    backgroundColor: '#51b884',  // Match the button background color of the home page
-    color: 'black',  // Match the button text color of the home page
-    fontSize: '130%',
-    border: 'solid gray 2px',
-    borderRadius: '10px',
+    backgroundColor: '#51b884',
+    color: '#fff',
+    fontSize: '18px',
+    border: 'none',
+    borderRadius: '5px',
     cursor: 'pointer',
+    transition: 'background-color 0.3s',
   };
 
   const linkStyle = {
-    color: '#2d9ccf',
+    color: '#3498db',
+    textDecoration: 'none',
+    fontWeight: 'bold',
   };
-  const logoStyle = {
-    marginLeft: "55%",
-    marginTop: "-29%",
-   padding:"1px" ,// Adjust the height as needed
-  marginBottom:"50px"
-  
+
+  const headingStyle = {
+    textAlign: 'center',
+    color: '#333',
+    fontSize: '36px',
+    marginBottom: '20px',
+  };
+
+  const subheadingStyle = {
+    textAlign: 'center',
+    color: '#777',
+    fontSize: '16px',
+    marginBottom: '30px',
+  };
+
+  const pageStyle = {
+    backgroundColor: 'beige',
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:"5px"
   };
 
   return (
-    <div style={{ margin: "1px", backgroundColor: "beige", paddingLeft: "50px",marginTop:"4px" ,paddingRight:"55px", padding:"100px"}}>
-      <div>
+    <div style={pageStyle}>
+      <div style={containerStyle}>
+        <h1 style={headingStyle}>Join Us!</h1>
+        <p style={subheadingStyle}>
+          Create an account and unlock amazing features.
+        </p>
+
         {!userRole && (
           <div>
             <button
@@ -61,19 +92,13 @@ const Register = () => {
         {userRole === 'artisan' && <ArtisanRegistration />}
 
         {/* Link to the login page */}
-        <p style={{ padding: '20px' }}>
+        <p style={{ textAlign: 'center', marginTop: '20px' }}>
           Already have an account?{' '}
           <Link to="/login" style={linkStyle}>
             Login here
           </Link>
         </p>
       </div>
-      <img 
-        src={logo} 
-        alt="CarthageCraft Logo" 
-        width="50%" 
-        style={logoStyle} 
-      />
     </div>
   );
 };

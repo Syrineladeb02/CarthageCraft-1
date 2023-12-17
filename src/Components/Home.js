@@ -6,9 +6,9 @@ import logo from "../images/logo.jpg";
 function Home() {
   const logoStyle = {
     marginLeft: "55%",
-    marginTop: "-29%",
+    marginTop: "-40%",
    padding:"1px" ,// Adjust the height as needed
-  marginBottom:"50px"
+  marginBottom:"50px",
   
   };
 
@@ -23,6 +23,9 @@ function Home() {
 
   return (
     <div style={{ margin: "1px", backgroundColor: "beige", paddingLeft: "50px",marginTop:"4px" ,paddingRight:"55px"}}>
+      <br/>
+      <br/>
+      <br/>
       <br/>
       <br />
       <h1>Buy and sell Tunisian Products <br /> without leaving your home.</h1>

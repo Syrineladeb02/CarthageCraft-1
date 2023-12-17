@@ -54,9 +54,7 @@ function NavigationBar() {
                             <NavLink to="/products" style={linkStyle}>Products</NavLink>
                         </Nav.Link>
                         {/* Add a Nav.Link with Link for Artisan Profile */}
-                        <Nav.Link>
-                            <Link to="/artisan-profile" style={linkStyle}>Artisan Profile</Link>
-                        </Nav.Link>
+                        
                     </Nav>
                 </Container>
             </Navbar>

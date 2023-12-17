@@ -1,6 +1,6 @@
 import pottery from "../images/pottery.jpg";
 import jewelry from "../images/jewelry.jpg";
-
+import zarbya from "../images/zarbya.jpg";
 export const artisans = [
   {
     id: 0,
@@ -43,8 +43,8 @@ export const products = [
     category:"pottery",
     artisanId: 0, 
     comments: [
-      { _id: 1, user: { username: 'User1' }, text: 'Great product!' },
-      { _id: 2, user: { username: 'User2' }, text: 'I love it!' },
+      { _id: 1, user: { username: 'Salma.Chikh' }, text: 'Great product!' },
+      { _id: 2, user: { username: 'Amir.Ali' }, text: 'I love it <3 !' },
     ],
   },
   {
@@ -63,14 +63,14 @@ export const products = [
     ],
   },
   {
-    id: 0,
-    name: "Artisanal accessories",
+    id: 2,
+    name: "Zarbya",
     description: "One-of-a-kind jewelry pieces that stand out.",
     price: 88,
     qte: 0,
     region:"tunis",
-    category:"jewelry",
-    image:jewelry,
+    category:"zarbya",
+    image:zarbya,
     artisanId: 2, 
     comments: [
       { _id: 3, user: { username: 'laila' }, text: 'Amazing craftsmanship!' },

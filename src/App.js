@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+
 import NavigationBar from './Components/Both/NavigationBar';
-import HIW from './Components/HIW';
-import Advantages from './Components/Advantages';
 import Home from './Components/Home';
+import Advantages from './Components/Advantages';
+import HIW from './Components/HIW';
 import Register from './Components/Both/Register';
 import Login from './Components/Both/Login';
-import ArtisanDashboard from './Components/Artisan/ArtisanDashboard';
 import BuyerProfile from './Components/Buyer/BuyerProfile';
 import ProductDetails from './Components/Artisan/ProductDetails';
-import Order from './Components/Buyer/Order'; // Import your Order component
+import Order from './Components/Buyer/Order';
 import ListOfProducts from './Components/Artisan/ListOfProducts';
-import { products } from "./Components/Data";
-import { useState } from "react";
-import axios from "axios"; 
-import { useEffect } from "react";
+import ArtisanRegistration from './Components/Artisan/ArtisanRegistration';
 import BuyerRegistration from './Components/Buyer/BuyerRegistration';
-import ArtisanProfile from './Components/Artisan/ArtisanProfile';
+
+import { products } from './Components/Data';
+
 function App() {
   const [product, setProduct] = useState(products);
   const [sum, setSum] = useState(0);
@@ -35,23 +35,13 @@ function App() {
 
   const handleIncrement = (id) => {
     setProduct(
-      product.map((elt) => {
-        if (elt.id === id) {
-          return { ...elt, qte: elt.qte + 1 };
-        }
-        return elt;
-      })
+      product.map((elt) => (elt.id === id ? { ...elt, qte: elt.qte + 1 } : elt))
     );
   };
 
   const handleDecrement = (id) => {
     setProduct(
-      product.map((elt) => {
-        if (elt.id === id && elt.qte > 0) {
-          return { ...elt, qte: elt.qte - 1 };
-        }
-        return elt;
-      })
+      product.map((elt) => (elt.id === id && elt.qte > 0 ? { ...elt, qte: elt.qte - 1 } : elt))
     );
   };
 
@@ -83,11 +73,11 @@ function App() {
           <Route path="/how-it-works" element={<HIW />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<ArtisanDashboard />} />
-          <Route path="/order" element={<Order />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/order/:id" element={<Order />} />
           <Route path="/buyer-profile" element={<BuyerProfile/>} />
         <Route path="/buyer-registration" element={<BuyerRegistration />} />
-        <Route path="/artisan-profile" element={<ArtisanProfile/>} />
+        <Route path="/artisan-registration" element={<ArtisanRegistration />} />
           <Route
             path="/products"
             element={

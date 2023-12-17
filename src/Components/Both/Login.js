@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from "axios"; 
-import { useNavigate } from "react-router-dom"; 
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -12,7 +11,7 @@ const Login = () => {
 
   const [error, setError] = useState(null); // State for error message
 
-  const url = "http://localhost:8008/api/signIn";
+  const url = 'http://localhost:8008/api/signIn';
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -25,12 +24,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Sending login data:", loginData);
-    axios.post(url, loginData)
+    console.log('Sending login data:', loginData);
+    axios
+      .post(url, loginData)
       .then((response) => {
         console.log(response.data);
         const token = response.data.token;
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         if (response.data.user.role === 'user') {
           // Redirect to the buyer's profile after successful login
           navigate('/buyer-profile');
@@ -39,25 +39,30 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.error("There was an error!", error);
-        setError("Incorrect email or password");
+        console.error('There was an error!', error);
+        setError('Incorrect email or password');
       });
   };
 
   const formStyle = {
-    maxWidth: 'center',
-    padding: '40px',
+    maxWidth: '500px',
+    padding: '50px',
     border: '2px solid #51b884',
-    borderRadius: '50px',
+    borderRadius: '40px',
     backgroundColor: '#f9f9f9',
     fontFamily: 'sans-serif',
-    margin: '200px',
-    marginTop: '30px',
+    margin: '200px auto',
+    marginTop: '-20px',
   };
 
   const labelStyle = {
     display: 'block',
     margin: '10px 0',
+  };
+  const linkStyle = {
+    color: '#3498db',
+    textDecoration: 'none',
+    fontWeight: 'bold',
   };
 
   const inputStyle = {
@@ -65,6 +70,8 @@ const Login = () => {
     padding: '8px',
     boxSizing: 'border-box',
     marginBottom: '10px',
+    border: '2px solid #9fbbad',
+    borderRadius: '10px',
   };
 
   const buttonStyle = {
@@ -74,15 +81,14 @@ const Login = () => {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    paddingRight: '80px',
-    paddingLeft: '80px',
-    marginTop: "50px",
+    width: '100%',
   };
 
   return (
-    <div>
+    
+      <body style={{backgroundColor:"beige", padding:"100px", marginTop:"5px"}}>
       <form style={formStyle} onSubmit={handleSubmit}>
-        <h2 style={{ textAlign: 'center' }}>Login</h2>
+        <h2 style={{ textAlign: 'center', color: '#42555f' }}>Login</h2>
         {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>} {/* Display error message */}
         <label style={labelStyle}>
           Email :
@@ -109,11 +115,12 @@ const Login = () => {
         </button>
 
         {/* Link to the registration page */}
-        <p style={{ textAlign: 'center', marginTop: '30px' }}>
-          Don't have an account? <Link to="/register">Register here</Link>
+        <p style={{ textAlign: 'center', marginTop: '30px', color: '#42555f' }}>
+          Don't have an account? <Link to="/register" style={linkStyle}>Register here</Link>
         </p>
       </form>
-    </div>
+      </body>
+    
   );
 };
 

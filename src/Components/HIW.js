@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaUserTie } from 'react-icons/fa';
-
 const HIW = () => {
   const containerStyle = {
     display: 'flex',
@@ -10,6 +9,7 @@ const HIW = () => {
     padding: '100px',
     fontFamily: 'Arial, sans-serif',
     background: 'beige',
+    marginTop:"5px"
   
   };
 
@@ -81,7 +81,7 @@ const HIW = () => {
       title: 'For Artisans',
       description: 'Showcase your craftsmanship, connect with buyers, and manage your product listings with our artisan-friendly platform.',
       cta: 'Become an Artisan',
-      link: '/register-artisan', // Update the link to the artisan registration page
+      link: '/artisan-registration', 
       icon: <FaUserTie style={iconStyle} />,
     },
   ];

@@ -12,6 +12,7 @@ const Advantages = () => {
     padding: '50px',
     fontFamily: 'Arial, sans-serif',
     backgroundColor: 'beige',
+    marginTop:"5px"
   };
 
   const cardContainerStyle = {

@@ -1,8 +1,7 @@
-
 import React from 'react';
 
 const Order = ({ location }) => {
-  const { state: { orderDetails } } = location;
+  const orderDetails = location?.state?.orderDetails || null;
 
   if (!orderDetails) {
     return <p>No order details available.</p>;
