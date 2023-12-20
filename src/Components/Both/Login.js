@@ -11,7 +11,7 @@ const Login = () => {
 
   const [error, setError] = useState(null); // State for error message
 
-  const url = 'http://localhost:8008/api/signIn';
+  const url = 'http://localhost:6006/api/signIn';
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -33,7 +33,7 @@ const Login = () => {
         localStorage.setItem('token', token);
         if (response.data.user.role === 'user') {
           // Redirect to the buyer's profile after successful login
-          navigate('/buyer-profile');
+          navigate('/buyerProfile');
         } else {
           navigate('/dashboard');
         }

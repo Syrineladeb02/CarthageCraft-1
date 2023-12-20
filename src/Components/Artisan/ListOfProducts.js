@@ -32,20 +32,20 @@ export default function ListOfProducts({
     padding: '10px',
   };
 
-  const url = "http://localhost:8008/api/products";
-
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        setProduct(res.data.product);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const url = "http://localhost:6006/api/products"; 
+  const url2="http://localhost:6006/api/artisans"
+  useEffect(() => { 
+    axios 
+      .get(url) 
+      .then((res) => { 
+         setProduct(res.data.product); 
+        console.log(res); 
+      }) 
+      .catch((err) => { 
+        console.log(err); 
+      }); 
   }, []);
-
+  
   return (
     <div style={{ backgroundColor: "beige", padding: "30px",marginTop:"5px"}}>
       <ProductSearch onSearch={handleSearch} />

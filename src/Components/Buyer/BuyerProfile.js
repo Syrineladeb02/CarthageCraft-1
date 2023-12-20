@@ -6,6 +6,8 @@ import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { FaShoppingBag } from 'react-icons/fa';
+import OrderHistory from './OrderHistory';
+import { Link } from 'react-router-dom';
 
 const profileContainerStyle = {
   width: '100%',
@@ -15,7 +17,7 @@ const profileContainerStyle = {
   marginTop: '50px',
   fontFamily: 'Arial, sans-serif',
 };
-<FaShoppingBag/>
+
 const welcomeBackStyle = {
   fontSize: '24px',
   color: '#333',
@@ -143,7 +145,7 @@ function BuyerProfile() {
           </Card.Body>
         </Card>
       </div>
-
+      <OrderHistory />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Update Information</Modal.Title>
@@ -176,7 +178,9 @@ function BuyerProfile() {
               <Form.Label>password </Form.Label>
               <Form.Control type="text" defaultValue={user?.password} onChange={handleChange} name="password" />
             </Form.Group>
-
+            <Link to="/order-history">
+  <FaShoppingBag style={{ fontSize: '24px', color: 'black' }} />
+</Link>
             <Button variant="primary" type="submit">
               Submit
             </Button>

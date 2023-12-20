@@ -8,14 +8,16 @@ const ArtisanProfile = () => {
   const [artisan, setArtisan] = useState(null);
 
   useEffect(() => {
-    // Fetch artisan data based on the id
-    axios.get(`http://localhost:8008/api/artisans/${id}`)
-      .then(response => {
+    const fetchArtisan = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8008/api/artisans/${id}`);
         setArtisan(response.data); // Assuming the API response contains the artisan data
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching artisan data:', error);
-      });
+      }
+    };
+
+    fetchArtisan();
   }, [id]);
 
   // Check if artisan data is still loading

@@ -40,7 +40,7 @@ const ArtisanRegistration = () => {
 
     // Update the API endpoint based on the backend changes
     axios
-    .post("http://localhost:8008/api/artisan/register", formData)
+    .post("http://localhost:6006/api/artisan/register", formData)
     .then((response) => {
       console.log(response.data);
       setIsSubmitted(true);

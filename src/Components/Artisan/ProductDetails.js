@@ -1,91 +1,48 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
+import CardItem from "./CardItem";
 import { useParams, useNavigate } from 'react-router-dom';
-import { artisans, products } from '../Data';
 import Review from '../Buyer/Review';
 
-const ProductDetails = ({ handleIncrement, handleDecrement }) => {
+export default function ProductDetails({
+  product,
+  artisans,
+  handleIncrement,
+  handleDecrement,
+  handleDelete,
+  handleSumIncrement,
+  handleSumDecrement,
+  handleSumDelete,
+}) {
   const { id } = useParams();
+  const elt = product.find((p) => p.id === Number(id));
   const navigate = useNavigate();
-
-  const elt = products.find((elt) => elt.id === Number(id));
-  const artisan = artisans.find((a) => a.id === elt.artisanId);
-  const stars = [...Array(5)].map((item, i) => (
-    <span
-      key={i}
-      style={{ color: elt.rating >= i ? '#f0c14b' : '#ccc', fontSize: '20px' }}
-    >
-      ★
-    </span>
-  ));
-
   const [newComment, setNewComment] = useState('');
-  const [quantity, setQuantity] = useState(elt.qte);
+  
   const handleAddComment = () => {
     // Handle adding a new comment logic here
     // You can use this function to send the comment to your backend or update the state, etc.
     console.log('Adding comment:', newComment);
     setNewComment('');
   };
-  const handleIncrementQte = () => {
-    setQuantity(quantity + 1);
-  };
 
-  const handleDecrementQte = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
   return (
-    <div style={{ maxWidth: '100%', marginTop: '5px', padding: '20px', backgroundColor: 'beige' }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-      <div style={{ flex: '1' }}>
-        <img src={elt.image} alt={elt.name} style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }} />
-      </div>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
+      {elt && (
+        <CardItem
+          elt={elt}
+          artisans={artisans}
+          details={true}
+          handleIncrement={handleIncrement}
+          handleDecrement={handleDecrement}
+          handleDelete={handleDelete}
+          handleSumIncrement={handleSumIncrement}
+          handleSumDecrement={handleSumDecrement}
+          handleSumDelete={handleSumDelete}
+        />
+      )}
 
-      <div style={{ flex: '1', marginLeft: '20px' }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: '10px', color: '#111', textAlign: 'center' }}>Product Details</h1>
-        <div style={{ textAlign: 'left' }}>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' , marginTop:"50px"}}>
-              <strong style={{color:"#34bd78"}}>Name:</strong> {elt.name}
-            </p>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' }}>
-              <strong style={{color:"#34bd78"}}>Price:</strong> {elt.price} dt
-            </p>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' }}>
-              <strong style={{color:"#34bd78"}}>Artisan:</strong> {artisan.name}
-            </p>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' }}>
-              <strong style={{color:"#34bd78"}}>Rating:</strong> {stars}
-            </p>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' }}>
-              <strong style={{color:"#34bd78"}}>Region:</strong> {elt.region}
-            </p>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' }}>
-              <strong style={{color:"#34bd78"}}>Category:</strong> {elt.category}
-            </p>
-            <p style={{ fontSize: '1.2rem', marginBottom: '5px', color: 'black' }}>
-              <strong style={{color:"#34bd78"}}>Description:</strong> {elt.description}
-            </p>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <Button
-          variant="outline-dark"
-          style={{ color: 'black', border: '1px solid #343a40', padding: '10px', fontSize: '1.2rem', cursor: 'pointer' }}
-          onClick={handleDecrementQte}
-        >
-          -
-        </Button>
-        <span style={{ fontSize: '1.2rem', margin: '0 10px' }}>{quantity}</span>
-        <Button
-          variant="outline-dark"
-          style={{ color: 'black', border: '1px solid #343a40', padding: '10px', fontSize: '1.2rem', cursor: 'pointer' }}
-          onClick={handleIncrementQte}
-        >
-          +
-        </Button>
-      </div>
-          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <button
           onClick={() => {
             navigate(`/order/${id}`, {
@@ -101,21 +58,19 @@ const ProductDetails = ({ handleIncrement, handleDecrement }) => {
               },
             });
           }}
-              style={{
-                padding: '15px',
-                cursor: 'pointer',
-                backgroundColor: '#34bd78',
-                color: '#111',
-                border: 'none',
-                borderRadius: '25px',
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-              }}
-            >
-              Add to Cart
-            </button>
-          </div>
-        </div>
+          style={{
+            padding: '15px',
+            cursor: 'pointer',
+            backgroundColor: '#34bd78',
+            color: '#111',
+            border: 'none',
+            borderRadius: '25px',
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
 
       <div style={{ marginTop: '40px' }}>
@@ -166,6 +121,4 @@ const ProductDetails = ({ handleIncrement, handleDecrement }) => {
       </div>
     </div>
   );
-};
-
-export default ProductDetails;
+}
